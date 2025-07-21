@@ -1,16 +1,118 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Product List</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Online Bookstore - Products</title>
+    <style>
+        /* Reset some default styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+            color: #333;
+            padding: 40px 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 40px;
+            color: #2c3e50;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+        }
+        .product-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            width: 100%;
+            max-width: 960px;
+        }
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+            padding: 25px;
+            text-align: center;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+        }
+        .product-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #34495e;
+        }
+        .product-price {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #27ae60;
+            margin-bottom: 20px;
+        }
+        .btn {
+            background: #2980b9;
+            color: white;
+            text-decoration: none;
+            padding: 12px 28px;
+            font-weight: 600;
+            border-radius: 30px;
+            box-shadow: 0 4px 10px rgba(41, 128, 185, 0.3);
+            transition: background 0.3s ease, box-shadow 0.3s ease;
+            display: inline-block;
+        }
+        .btn:hover {
+            background: #1c5980;
+            box-shadow: 0 6px 14px rgba(28, 89, 128, 0.45);
+        }
+        .cart-link {
+            margin-top: 50px;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #2c3e50;
+            text-decoration: none;
+            border: 3px solid #2c3e50;
+            padding: 14px 40px;
+            border-radius: 40px;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+        .cart-link:hover {
+            background: #2c3e50;
+            color: white;
+            box-shadow: 0 8px 20px rgba(44, 62, 80, 0.4);
+        }
+        /* Responsive typography */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2rem;
+            }
+            .btn, .cart-link {
+                padding: 10px 24px;
+                font-size: 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>Available Product</h1>
-    {% for id, product in products.items() %}
-        <p>
-            {{ product.title }} - ${{ product.price }}
-            <a href="{{ url_for('add_to_cart', product_id=id) }}">Add to Cart</a>
-        </p>
-    {% endfor %}
-    <a href="{{ url_for('view_cart') }}">Go to Cart</a>
+    <h1>Our Product's</h1>
+    <div class="product-list">
+        {% for id, product in products.items() %}
+        <div class="product-card">
+            <div class="product-title">{{ product.title }}</div>
+            <div class="product-price">${{ product.price }}</div>
+            <a href="{{ url_for('add_to_cart', product_id=id) }}" class="btn">Add to Cart</a>
+        </div>
+        {% endfor %}
+    </div>
+
+    <a href="{{ url_for('view_cart') }}" class="cart-link">🛒 View Your Cart</a>
 </body>
 </html>
