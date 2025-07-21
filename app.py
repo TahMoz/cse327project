@@ -11,8 +11,8 @@ app.secret_key = "your_secret_key"  # Required for session
 
 # Sample product list (normally fetched from a DB)
 products = {
-    1: {"title": "Python for Beginners", "price": 25},
-    2: {"title": "Flask Essentials", "price": 40},
+    1: {"title": "Watch", "price": 25},
+    2: {"title": "Note Books", "price": 40},
 }
 
 @app.route('/')
