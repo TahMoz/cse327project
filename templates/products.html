@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Book List</title>
+    <title>Product List</title>
 </head>
 <body>
-    <h1>Available Books</h1>
-    {% for id, book in products.items() %}
+    <h1>Available Product</h1>
+    {% for id, product in products.items() %}
         <p>
-            {{ book.title }} - ${{ book.price }}
+            {{ product.title }} - ${{ product.price }}
             <a href="{{ url_for('add_to_cart', product_id=id) }}">Add to Cart</a>
         </p>
     {% endfor %}
