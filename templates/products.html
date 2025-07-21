@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Book List</title>
+</head>
+<body>
+    <h1>Available Books</h1>
+    {% for id, book in products.items() %}
+        <p>
+            {{ book.title }} - ${{ book.price }}
+            <a href="{{ url_for('add_to_cart', product_id=id) }}">Add to Cart</a>
+        </p>
+    {% endfor %}
+    <a href="{{ url_for('view_cart') }}">Go to Cart</a>
+</body>
+</html>
