@@ -5,10 +5,12 @@
 </head>
 <body>
     <h1>Checkout</h1>
-    <form method="POST">
-        Name: <input type="text" name="name" required><br>
-        Address: <textarea name="address" required></textarea><br>
-        <button type="submit">Place Order</button>
+    <form method="post">
+        <label>Name: <input type="text" name="name" required></label><br><br>
+        <label>Address: <textarea name="address" required></textarea></label><br><br>
+        <input type="submit" value="Place Order">
     </form>
+    <br>
+    <a href="{{ url_for('view_cart') }}">← Back to Cart</a>
 </body>
 </html>

@@ -1,5 +1,10 @@
+"""
+Main Flask application for Online Bookstore.
 
-from flask import Flask, render_template, session, redirect, url_for
+Author: Aleya Akter
+"""
+
+from flask import Flask, session, redirect, url_for, request, render_template
 
 app = Flask(__name__)
 app.secret_key = "your_secret_key"
