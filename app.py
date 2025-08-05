@@ -26,22 +26,6 @@ db = mysql.connector.connect(
     database="shopping_db"
 )
 cursor = db.cursor()
-
-@app.route('/')
-@jwt_required(optional=True)
-def product_list():
-    """
-    Display a list of available products.
-
-    ---
-    responses:
-      200:
-        description: List of products
-    """
-    cursor.execute("SELECT id, name, price FROM products")
-    products = cursor.fetchall()
-    return render_template('product_list.html', products=products)
-
 @app.route('/add_to_cart', methods=['POST'])
 @jwt_required(optional=True)
 def add_to_cart():
