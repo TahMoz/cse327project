@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Orders</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<h2>My Orders</h2>
+
+{% if orders %}
+<table border="1">
+    <thead>
+        <tr>
+            <th>Order ID</th>
+            <th>Date</th>
+            <th>Total Price</th>
+            <th>Items</th>
+            <th>Address</th>
+            <th>Payment Method</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for o in orders %}
+        <tr>
+            <td>{{ o[0] }}</td>
+            <td>{{ o[1] }}</td>
+            <td>${{ o[2] }}</td>
+            <td>{{ o[5] }}</td>
+            <td>{{ o[3] }}</td>
+            <td>{{ o[4] }}</td>
+            <td><a href="{{ url_for('order_detail', order_id=o[0]) }}">View</a></td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>You have no orders yet.</p>
+{% endif %}
+
+<a href="{{ url_for('product_list') }}">Back to Shopping</a>
+
+</body>
+</html>
