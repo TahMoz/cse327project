@@ -6,7 +6,7 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = 'StenNwear'
+project = 'StepNwear'
 copyright = '2025, tahmina'
 author = 'tahmina'
 release = '13-08-2025'
