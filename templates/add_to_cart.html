@@ -1,24 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <title>Products</title>
 </head>
 <body>
 
     <h2>Product List</h2>
 
+    <a href="{{ url_for('view_cart') }}">View Cart</a>
+    <hr />
+
     {% for product in products %}
     <div>
-        <h3>{{ product[1] }}</h3>
-        <p>Price: ${{ product[2] }}</p>
-        <form action="/add_to_cart" method="post">
-            <input type="hidden" name="product_id" value="{{ product[0] }}">
-            <input type="hidden" name="quantity" value="1">
+        <h3>{{ product.name }}</h3>
+        <p>Price: ${{ product.price }}</p>
+        <form action="{{ url_for('add_to_cart') }}" method="post">
+            <input type="hidden" name="product_id" value="{{ product.id }}" />
+            <input type="hidden" name="quantity" value="1" />
             <button type="submit">Add to Cart</button>
         </form>
     </div>
-    <hr>
+    <hr />
     {% endfor %}
 
 </body>

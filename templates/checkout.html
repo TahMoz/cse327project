@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <title>Checkout</title>
 </head>
 <body>
@@ -9,20 +9,18 @@
     <h2>Checkout</h2>
 
     <form method="POST">
+        <label for="address">Shipping Address:</label><br />
+        <textarea id="address" name="address" rows="4" required></textarea><br /><br />
 
-        <label for="address">Shipping Address:</label><br>
-        <textarea id="address" name="address" rows="4" cols="50" required></textarea><br><br>
-
-        <label for="payment_method">Payment Method:</label><br>
+        <label for="payment_method">Payment Method:</label><br />
         <select id="payment_method" name="payment_method" required>
             <option value="" disabled selected>-- Select Payment Method --</option>
             <option value="Cash on Delivery">Cash on Delivery</option>
             <option value="Credit Card">Credit Card</option>
             <option value="Bkash">Bkash</option>
-        </select><br><br>
+        </select><br /><br />
 
         <button type="submit">Place Order</button>
-
     </form>
 
 </body>

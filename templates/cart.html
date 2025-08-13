@@ -1,46 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Your Cart</title>
+    <title>Shopping Cart</title>
 </head>
 <body>
-    <h2>Your Cart</h2>
-
-    {% if cart %}
-    <table border="1">
-        <thead>
-            <tr>
-                <th>Product</th>
-                <th>Price</th>
-                <th>Qty</th>
-                <th>Subtotal</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for item in cart %}
-            <tr>
-                <td>{{ item.name }}</td>
-                <td>${{ item.price }}</td>
-                <td>{{ item.quantity }}</td>
-                <td>${{ item.subtotal }}</td>
-                <td>
-                    <form action="/remove_from_cart" method="post">
-                        <input type="hidden" name="product_id" value="{{ item.id }}">
-                        <button type="submit">Remove</button>
-                    </form>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
+    <h1>Your Cart</h1>
+    <table border="1" cellpadding="10">
+        <tr>
+            <th>Name</th>
+            <th>Price ($)</th>
+            <th>Quantity</th>
+            <th>Total ($)</th>
+            <th>Action</th>
+        </tr>
+        {% for product in products %}
+        <tr>
+            <td>{{ product['name'] }}</td>
+            <td>{{ product['price'] }}</td>
+            <td>{{ product['quantity'] }}</td>
+            <td>{{ product['total_price'] }}</td>
+            <td>
+                <form method="POST" action="{{ url_for('remove_from_cart') }}">
+                    <input type="hidden" name="product_id" value="{{ product['id'] }}">
+                    <button type="submit">Remove</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
     </table>
-
-    <p>Total: ${{ total }}</p>
-
-    <a href="{{ url_for('checkout') }}">Place Order</a>
-    {% else %}
-    <p>Your cart is empty.</p>
-    {% endif %}
+    <h3>Subtotal: ${{ subtotal }}</h3>
+    <a href="{{ url_for('checkout') }}">Checkout</a><br>
+    <a href="{{ url_for('product_list') }}">Continue Shopping</a>
 </body>
 </html>
