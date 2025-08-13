@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="filters">
+  <div>
+    <label>Category:
+      <select id="filter-category">
+        <option value="">All</option>
+        <option value="Electronics">Electronics</option>
+        <option value="Books">Books</option>
+        <option value="Clothing">Clothing</option>
+      </select>
+    </label>
+  </div>
+
+  <div>
+    <label>Price:
+      <input type="number" id="min-price" placeholder="Min" step="0.01" />
+      -
+      <input type="number" id="max-price" placeholder="Max" step="0.01" />
+    </label>
+  </div>
+
+  <div>
+    <label>Sort:
+      <select id="sort">
+        <option value="newest">Newest</option>
+        <option value="price_asc">Price: Low → High</option>
+        <option value="price_desc">Price: High → Low</option>
+      </select>
+    </label>
+  </div>
+
+  <div>
+    <button id="apply-filters">Apply</button>
+  </div>
+</div>
+
+<div id="product-list" class="product-grid"></div>
+
+<div class="pagination">
+  <button id="prev-page" disabled>Prev</button>
+  <span id="page-info"></span>
+  <button id="next-page" disabled>Next</button>
+</div>
+{% endblock %}
