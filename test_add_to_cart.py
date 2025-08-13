@@ -1,10 +1,10 @@
 import pytest
-from app import app
+from order import order
 
 @pytest.fixture
 def client():
-    app.config['TESTING'] = True
-    with app.test_client() as client:
+    order.config['TESTING'] = True
+    with order.test_client() as client:
         yield client
 
 def test_add_to_cart(client):
