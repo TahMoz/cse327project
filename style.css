@@ -1,0 +1,64 @@
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    margin: 20px;
+    background-color: #f0f4f8;
+    color: #1c1c1c;
+}
+.container {
+    background: #ffffff;
+    padding: 20px 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+/* Headings */
+h1, h2 {
+    color: #0d3b66; /* Nervy blue */
+}
+
+/* Links */
+a {
+    color: #0d3b66;
+    text-decoration: none;
+    font-weight: 500;
+}
+a:hover {
+    text-decoration: underline;
+}
+
+/* Tables */
+table {
+    border-collapse: collapse;
+    width: 90%;
+    margin-top: 15px;
+}
+th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+tr:nth-child(even) { background: #f9fbfd; }
+tr:hover { background: #e1f0ff; }
+
+/* Forms & Inputs */
+input[type="number"], input[type="text"] {
+    padding: 6px 8px;
+    margin-bottom: 10px;
+    width: 50%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Buttons */
+button {
+    background-color: #0d3b66;
+    color: white;
+    padding: 6px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+}
+button:hover {
+    background-color: #0a2a4d;
+}
