@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head><title>User Dashboard</title></head>
+<body>
+  <h2>User Dashboard - Welcome {{ username }}</h2>
+  <a href="{{ url_for('logout') }}">Logout</a>
+  <h3>Products</h3>
+  <ul>
+    {% for product in products %}
+      <li>
+        <strong>{{ product['name'] }}</strong> - ${{ product['price'] }}<br>
+        {{ product['description'] }}
+      </li>
+    {% else %}
+      <li>No products available.</li>
+    {% endfor %}
+  </ul>
+  <p>Features to add: Add to cart, checkout...</p>
+</body>
+</html>
