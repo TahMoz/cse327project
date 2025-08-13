@@ -1,35 +1,50 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Shopping Cart</title>
 </head>
 <body>
-    <h1>Your Cart</h1>
-    <table border="1" cellpadding="10">
-        <tr>
-            <th>Name</th>
-            <th>Price ($)</th>
-            <th>Quantity</th>
-            <th>Total ($)</th>
-            <th>Action</th>
-        </tr>
-        {% for product in products %}
-        <tr>
-            <td>{{ product['name'] }}</td>
-            <td>{{ product['price'] }}</td>
-            <td>{{ product['quantity'] }}</td>
-            <td>{{ product['total_price'] }}</td>
-            <td>
-                <form method="POST" action="{{ url_for('remove_from_cart') }}">
-                    <input type="hidden" name="product_id" value="{{ product['id'] }}">
-                    <button type="submit">Remove</button>
-                </form>
-            </td>
-        </tr>
-        {% endfor %}
-    </table>
-    <h3>Subtotal: ${{ subtotal }}</h3>
-    <a href="{{ url_for('checkout') }}">Checkout</a><br>
-    <a href="{{ url_for('product_list') }}">Continue Shopping</a>
+    <h1>Your Shopping Cart</h1>
+
+    {% if products %}
+        <table border="1" cellpadding="5" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                    <th>Remove</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in products %}
+                <tr>
+                    <td>{{ product.name }}</td>
+                    <td>{{ "%.2f"|format(product.price) }}</td>
+                    <td>{{ product.quantity }}</td>
+                    <td>{{ "%.2f"|format(product.total_price) }}</td>
+                    <td>
+                        <form method="post" action="{{ url_for('remove_from_cart') }}">
+                            <input type="hidden" name="product_id" value="{{ product.id }}">
+                            <input type="submit" value="Remove">
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <p>Subtotal: {{ "%.2f"|format(subtotal) }}</p>
+
+        <form method="post" action="{{ url_for('checkout') }}">
+            <input type="submit" value="Checkout">
+        </form>
+        <p><a href="{{ url_for('product_list') }}">Continue Shopping</a></p>
+
+    {% else %}
+        <p>Your cart is empty. <a href="{{ url_for('product_list') }}">Start shopping</a>.</p>
+    {% endif %}
 </body>
 </html>
