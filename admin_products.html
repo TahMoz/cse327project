@@ -1,54 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Admin - Products</title>
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <meta charset="UTF-8" />
+  <title>Admin - Products</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
+<div class="container">
+  <h2>Product Management</h2>
 
-<h2>Product Management</h2>
-
-<form method="get" action="{{ url_for('admin_products') }}">
-    <input type="text" name="q" placeholder="Search..." value="{{ q }}">
+  <form method="get" action="{{ url_for('admin_products') }}">
+    <input type="text" name="q" placeholder="Search..." value="{{ q or '' }}">
     <button type="submit">Search</button>
-</form>
+    <a href="{{ url_for('admin_create_product') }}" style="margin-left:8px;">Add New Product</a>
+  </form>
 
-<a href="{{ url_for('admin_create_product') }}">Add New Product</a>
-
-{% if products %}
-<table border="1">
+  {% if products %}
+  <table>
     <thead>
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Price</th>
-            <th>Active</th>
-            <th>Actions</th>
-        </tr>
+      <tr>
+        <th>ID</th><th>Name</th><th>Description</th><th>Price</th><th>Active</th><th>Actions</th>
+      </tr>
     </thead>
     <tbody>
     {% for p in products %}
-        <tr>
-            <td>{{ p[0] }}</td>
-            <td>{{ p[1] }}</td>
-            <td>${{ p[2] }}</td>
-            <td>{{ 'Yes' if p[3] else 'No' }}</td>
-            <td>
-                <a href="{{ url_for('admin_edit_product', pid=p[0]) }}">Edit</a>
-                <form action="{{ url_for('admin_delete_product', pid=p[0]) }}" method="post" style="display:inline;">
-                    <button type="submit">Delete</button>
-                </form>
-            </td>
-        </tr>
+      <tr>
+        <td>{{ p['id'] }}</td>
+        <td>{{ p['name'] }}</td>
+        <td>{{ p['description'] or '-' }}</td>
+        <td>${{ p['price'] }}</td>
+        <td>{{ 'Yes' if p['is_active'] else 'No' }}</td>
+        <td>
+          <a href="{{ url_for('admin_edit_product', pid=p['id']) }}">Edit</a>
+          <form action="{{ url_for('admin_delete_product', pid=p['id']) }}" method="post" style="display:inline;">
+            <button type="submit" onclick="return confirm('Delete this product?')">Delete</button>
+          </form>
+        </td>
+      </tr>
     {% endfor %}
     </tbody>
-</table>
-{% else %}
-<p>No products found.</p>
-{% endif %}
+  </table>
+  {% else %}
+    <p>No products found.</p>
+  {% endif %}
 
-<a href="{{ url_for('product_list') }}">Back to Store</a>
-
+  <p><a href="{{ url_for('admin_dashboard') }}">Back to Admin Dashboard</a></p>
+</div>
 </body>
 </html>
