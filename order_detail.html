@@ -1,43 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Order Details</title>
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <meta charset="UTF-8" />
+  <title>Order Details</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
+<div class="container">
+  <h2>Order #{{ order['id'] }}</h2>
+  <p><strong>Date:</strong> {{ order['created_at'] }}</p>
+  <p><strong>Status:</strong> {{ order['status'] }}</p>
+  <p><strong>Total Price:</strong> ${{ order['total_price'] or 0 }}</p>
+  <p><strong>Address:</strong> {{ order['address'] or '-' }}</p>
+  <p><strong>Payment Method:</strong> {{ order['payment_method'] or '-' }}</p>
 
-<h2>Order #{{ order[0] }}</h2>
-<p><strong>Date:</strong> {{ order[2] }}</p>
-<p><strong>Total Price:</strong> ${{ order[3] }}</p>
-<p><strong>Address:</strong> {{ order[4] }}</p>
-<p><strong>Payment Method:</strong> {{ order[5] }}</p>
-
-<h3>Items</h3>
-<table border="1">
+  <h3>Items</h3>
+  <table>
     <thead>
-        <tr>
-            <th>Product</th>
-            <th>Qty</th>
-            <th>Price</th>
-            <th>Subtotal</th>
-        </tr>
+      <tr>
+        <th>Product</th>
+        <th>Qty</th>
+        <th>Price</th>
+        <th>Subtotal</th>
+      </tr>
     </thead>
     <tbody>
-    {% for item in items %}
-        <tr>
-            <td>{{ item[1] }}</td>
-            <td>{{ item[2] }}</td>
-            <td>${{ item[3] }}</td>
-            <td>${{ item[4] }}</td>
-        </tr>
+    {% for it in items %}
+      <tr>
+        <td>{{ it['product_name'] }}</td>
+        <td>{{ it['quantity'] }}</td>
+        <td>${{ it['price'] }}</td>
+        <td>${{ it['subtotal'] }}</td>
+      </tr>
     {% endfor %}
     </tbody>
-</table>
+  </table>
 
-<a href="{{ url_for('my_orders') }}">Back to My Orders</a>
-
+  <p><a href="{{ url_for('my_orders') }}">Back to My Orders</a></p>
+</div>
 </body>
 </html>
-
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
