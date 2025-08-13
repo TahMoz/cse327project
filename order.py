@@ -4,21 +4,24 @@ from flask_jwt_extended import (
     JWTManager,
     jwt_required,
     create_access_token,
-    get_jwt_identity
-)
+    get_jwt_identity)
 
-app = Flask(__name__)
-app.secret_key = "supersecretkey"
+order = Flask(__name__)
+order.secret_key = "supersecretkey"
 
-app.config["JWT_SECRET_KEY"] = "supersecretjwtkey"
-jwt = JWTManager(app)
+order.config["JWT_SECRET_KEY"] = "supersecretjwtkey"
+jwt = JWTManager(order)
 
 def get_db_connection():
     conn = sqlite3.connect('shopping_db.sqlite')
     conn.row_factory = sqlite3.Row  
     return conn
 
-@app.route('/add_to_cart', methods=['POST'])
+@order.route('/products')
+def product_list():
+    return "Product List"
+
+@order.route('/add_to_cart', methods=['POST'])
 @jwt_required(optional=True)
 def add_to_cart():
     product_id = int(request.form['product_id'])
@@ -34,7 +37,7 @@ def add_to_cart():
     return redirect(url_for('product_list'))
 
 
-@app.route('/cart')
+@order.route('/cart')
 @jwt_required(optional=True)
 def view_cart():
     cart = session.get('cart', {})
@@ -48,7 +51,7 @@ def view_cart():
         cursor.execute("SELECT * FROM products WHERE id = ?", (product_id,))
         product = cursor.fetchone()
         if product:
-            product = dict(product)  # convert Row object to dict
+            product = dict(product) 
             product['quantity'] = quantity
             product['total_price'] = product['price'] * quantity
             products.append(product)
@@ -58,7 +61,7 @@ def view_cart():
     return render_template("cart.html", products=products, subtotal=subtotal)
 
 
-@app.route('/remove_from_cart', methods=['POST'])
+@order.route('/remove_from_cart', methods=['POST'])
 @jwt_required(optional=True)
 def remove_from_cart():
     product_id = str(request.form['product_id'])
@@ -70,7 +73,7 @@ def remove_from_cart():
     session['cart'] = cart
     return redirect(url_for('view_cart'))
 
-@app.route('/checkout', methods=['POST'])
+@order.route('/checkout', methods=['POST'])
 @jwt_required()
 def checkout():
     current_user = get_jwt_identity()
@@ -101,4 +104,4 @@ def checkout():
     return redirect(url_for('product_list'))
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    order.run(debug=True)
