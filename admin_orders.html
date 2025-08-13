@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>All Orders</h2>
+<table>
+<tr><th>ID</th><th>User</th><th>Status</th><th>Items</th></tr>
+{% for o in orders %}
+<tr>
+<td>{{ o['id'] }}</td>
+<td>{{ o['username'] }}</td>
+<td>{{ o['status'] }}</td>
+<td>{{ ', '.join(order_details[o['id']]) }}</td>
+</tr>
+{% endfor %}
+</table>
+{% endblock %}

@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Products</h2>
+<ul>
+{% for p in products %}
+    <li>{{ p['name'] }} - ${{ p['price'] }} <a href="{{ url_for('product_reviews.product_reviews', product_id=p['id']) }}">Reviews</a></li>
+{% endfor %}
+</ul>
+{% endblock %}

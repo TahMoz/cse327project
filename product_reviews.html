@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>{{ product['name'] }}</h2>
+<p style="font-weight:bold;">Average Rating: {{ avg_rating|round(1) }}/5</p>
+
+<form method="POST">
+  <label>Rating (1-5): </label>
+  <input type="number" name="rating" min="1" max="5" required><br>
+  <label>Comment: </label>
+  <input type="text" name="comment" required><br>
+  <button>Submit Review</button>
+</form>
+
+<h3>Reviews</h3>
+<ul>
+{% for r in reviews %}
+<li><strong>{{ r['username'] }}</strong> - {{ r['rating'] }}/5 : {{ r['comment'] }}</li>
+{% endfor %}
+</ul>
+{% endblock %}
